@@ -1,13 +1,13 @@
-import type { EleganceThemeConfig } from "../types/loginTypes";
+import type { EleganceThemeConfigRegister } from "../types/registerTypes";
 
-export const EleganceTheme: EleganceThemeConfig = {
+export const EleganceTheme: EleganceThemeConfigRegister = {
   light: {
     bg: 'bg-[#FAFAFA]',
     panel: 'bg-white',
     textMain: 'text-[#1A1A1A]',
     textMuted: 'text-[#666666]',
     border: 'border-[#E5E5E5]',
-    accentText: 'text-[#9E8B75]',
+    accentText: 'text-[#9E8B75]', 
     accentBg: 'bg-[#9E8B75]',
     accentSubtle: 'bg-[#FDFBF9] border-[#EAE3DB]',
     userBubble: 'bg-[#1A1A1A] text-white',
@@ -15,7 +15,12 @@ export const EleganceTheme: EleganceThemeConfig = {
     hoverSubtle: 'hover:bg-[#F0F0F0]',
     divider: 'border-t-[#E5E5E5]',
     gradientFade: 'from-[#FAFAFA] via-[#FAFAFA]',
-    hex: { border: '#E5E5E5', bg: '#FAFAFA', focusRing: '#9E8B75' }
+    hex: { 
+      border: '#E5E5E5', 
+      bg: '#FAFAFA', 
+      focusRing: '#9E8B75',
+      chartColors: ['#171717', '#333333', '#555555', '#9E8B75', '#D4C4B7', '#EAE3DB']
+    }
   },
   dark: {
     bg: 'bg-[#0f0f0f]',
@@ -31,6 +36,11 @@ export const EleganceTheme: EleganceThemeConfig = {
     hoverSubtle: 'hover:bg-[#262626]',
     divider: 'border-t-[#262626]',
     gradientFade: 'from-[#0f0f0f] via-[#0f0f0f]',
-    hex: { border: '#262626', bg: '#0f0f0f', focusRing: '#D4C4B7' }
+    hex: { 
+      border: '#262626', 
+      bg: '#0f0f0f', 
+      focusRing: '#D4C4B7',
+      chartColors: ['#FAFAFA', '#D4D4D4', '#A3A3A3', '#D4C4B7', '#9E8B75', '#3D332D']
+    }
   }
 };

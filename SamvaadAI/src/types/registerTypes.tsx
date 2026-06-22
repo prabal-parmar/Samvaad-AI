@@ -1,4 +1,4 @@
-// To be moved to different file of Theme - Discard this one later
+// To be moved to different file of Theme
 export interface ThemeTokens {
   bg: string;
   panel: string;
@@ -17,10 +17,11 @@ export interface ThemeTokens {
     border: string; 
     bg: string; 
     focusRing: string; 
+    chartColors: string[];
   };
 }
 
-export interface EleganceThemeConfigLogin {
+export interface EleganceThemeConfigRegister {
   light: ThemeTokens;
   dark: ThemeTokens;
 }
