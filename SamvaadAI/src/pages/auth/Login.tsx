@@ -1,44 +1,26 @@
 import React, { useState, type JSX } from "react";
 import type { ThemeTokens } from "../../types/loginTypes";
-import { MoonIcon, SunIcon } from "../../icons/SamvaadIcons";
 import { EleganceTheme } from "../../theme/theme";
+import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import { useTheme } from "../../context/themeContext";
 
 export default function Login(): JSX.Element {
-  const [isDark, setIsDark] = useState<boolean>(false);
-
+  const { isDark } = useTheme()
+  const navigate = useNavigate();
   const theme: ThemeTokens = isDark ? EleganceTheme.dark : EleganceTheme.light;
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const handleLoginSubmit = (e: any) => {
     e.preventDefault();
     console.log("Login submitted!");
-    // Backend API
+    // Backend
   };
 
   return (
     <div
       className={`min-h-screen w-full flex flex-col transition-colors duration-500 font-sans ${theme.bg} ${theme.textMain}`}
     >
-      {}
-      <header className="absolute top-0 w-full flex justify-between items-center px-6 py-6 md:px-12 z-10">
-        <div className="font-serif text-2xl tracking-wide flex items-center gap-2">
-          <span className="hidden sm:block">Samvaad AI</span>
-          <div
-            className={`w-1.5 h-1.5 rounded-full ${theme.accentBg} mb-1`}
-          ></div>
-        </div>
-        <button
-          onClick={() => setIsDark(!isDark)}
-          className={`p-2.5 rounded-full border-[0.5px] transition-all duration-300 ${theme.border} ${theme.hoverSubtle} focus:outline-none focus:ring-2`}
-          style={
-            { "--tw-ring-color": theme.hex.focusRing } as React.CSSProperties
-          }
-          aria-label="Toggle Theme"
-        >
-          {isDark ? <SunIcon /> : <MoonIcon />}
-        </button>
-      </header>
-
-      {}
+      <Header />
       <main className="flex-grow flex items-center justify-center p-4">
         <div
           className={`w-full max-w-[420px] p-8 md:p-10 ${theme.panel} border-[0.5px] ${theme.border} rounded-xl shadow-sm relative overflow-hidden`}
@@ -159,7 +141,7 @@ export default function Login(): JSX.Element {
           </form>
 
           {}
-          <div className={`mt-8 pt-6 ${theme.divider}`}>
+          <div className={`mt-8 pt-6 ${theme.divider}`} onClick={() => navigate('/register')} >
             <p className={`text-center text-xs font-light ${theme.textMuted}`}>
               Don't have an account?{" "}
               <button
