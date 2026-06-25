@@ -1,8 +1,13 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/prabal-parmar/Samvaad-AI/configs"
+)
 
 func main() {
+
+	configs.ConnectDB();
 	router := gin.Default()
 
 	router.GET("/", func (c *gin.Context) {

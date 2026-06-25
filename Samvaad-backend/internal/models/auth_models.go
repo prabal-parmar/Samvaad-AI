@@ -11,15 +11,6 @@ type LoginResponse struct {
 	username string `json:"username"`
 }
 
-type RegisterRequest struct {
-	firstname string `json:"firstname"`
-	lastname string `json:"lastname"`
-	number int `json:"number"`
-	email string `json:"email"`
-	password string `json:"password"`
-	pGoal string `json:"primaryGoal"`
-}
-
 type RegisterResponse struct {
 	token string `json:"token"`
 	username string `json:"username"`

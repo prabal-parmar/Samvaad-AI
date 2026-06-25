@@ -11,7 +11,11 @@ func Login(req models.LoginRequest) (*models.LoginResponse, error){
 	return nil, errors.New("Something went wrong!")
 }
 
-func Register(req models.RegisterRequest) (*models.LoginResponse, error){
+func Register(req models.User) (*models.LoginResponse, error){
 	// Register service function logic here
+	return nil, errors.New("Something went wrong!")
+}
+
+func Logout() (interface{}, error){
 	return nil, errors.New("Something went wrong!")
 }
