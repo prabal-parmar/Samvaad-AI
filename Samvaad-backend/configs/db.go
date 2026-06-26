@@ -17,6 +17,7 @@ func ConnectDB() {
 	}
 
 	// As curently no password is required for postgres login
+	// Need to change
 	password := os.Getenv("DB_PASSWORD")
 	if password == "" {
 		password = "''"
