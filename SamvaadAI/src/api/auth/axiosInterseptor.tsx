@@ -1,0 +1,29 @@
+import axios from "axios";
+
+export const api = axios.create({
+    baseURL: "http://192.168.1.100:8080/api",
+    timeout: 10000,
+})
+
+export const storeToken = (token: string) => {
+    localStorage.setItem("token", token);
+}
+
+export const getToken = () => {
+    const token = localStorage.getItem("token");
+    return token ? token : "";
+}
+
+export const removeToken = () => {
+    localStorage.removeItem("token");
+    return;
+}
+
+api.interceptors.request.use((config) => {
+    const token = getToken();
+
+    if(token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+})
