@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/prabal-parmar/Samvaad-AI/configs"
+	"github.com/prabal-parmar/Samvaad-AI/internal/routes"
 )
 
 func main() {
@@ -10,7 +11,7 @@ func main() {
 	configs.ConnectDB();
 	router := gin.Default()
 
-	router.GET("/", func (c *gin.Context) {
-		c.JSON(200, gin.H{"message": "Hello World!!"})
-	})
+	routes.SetupRoutes(router);
+
+	router.Run(":8080")
 }
