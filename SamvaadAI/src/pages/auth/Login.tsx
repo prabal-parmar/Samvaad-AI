@@ -1,19 +1,43 @@
 import React, { useState, type JSX } from "react";
-import type { ThemeTokens } from "../../types/loginTypes";
+import type { LoginDataTypes, ThemeTokens } from "../../types/loginTypes";
 import { EleganceTheme } from "../../theme/theme";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import { useTheme } from "../../context/themeContext";
+import { loginUser } from "../../api/auth/authApis";
+import { storeToken } from "../../api/auth/axiosInterseptor";
 
 export default function Login(): JSX.Element {
-  const { isDark } = useTheme()
+  const { isDark } = useTheme();
   const navigate = useNavigate();
   const theme: ThemeTokens = isDark ? EleganceTheme.dark : EleganceTheme.light;
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const handleLoginSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("Login submitted!");
-    // Backend
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [loginInput, setLoginInput] = useState<LoginDataTypes>({
+    userInp: "",
+    password: "",
+  });
+
+  const handleLoginSubmit = async () => {
+    if(loginInput.userInp == "") {
+      console.log("No Username or Email.");
+      setErrorMsg("No Username or Email")
+      return;
+    }
+    if(loginInput.password == "") {
+      console.log("No Password.")
+      setErrorMsg("No Password")
+      return;
+    }
+    const [token, username, err] = await loginUser(loginInput);
+    if(token && username){
+      storeToken(token);
+      navigate("/");
+      setLoginInput({userInp:"", password:""})
+    }
+    else {
+      setErrorMsg(err);
+    }
   };
 
   return (
@@ -41,21 +65,22 @@ export default function Login(): JSX.Element {
             </p>
           </div>
 
-          <form onSubmit={handleLoginSubmit} className="space-y-6">
+          <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
             <div>
               <label
                 className={`block text-[10px] uppercase tracking-widest mb-2 ${theme.textMuted}`}
               >
-                Email Address
+                Username or Email Address
               </label>
               <input
                 type="email"
-                placeholder="name@example.com"
+                placeholder="Input here"
                 style={
                   {
                     "--tw-ring-color": theme.hex.focusRing,
                   } as React.CSSProperties
                 }
+                onChange={(e) => setLoginInput(prev => ({...prev, userInp: e.target.value}))}
                 className={`w-full p-3 text-sm bg-transparent border-[0.5px] ${theme.border} rounded-lg outline-none transition-all duration-300 placeholder-opacity-40 focus:ring-1`}
                 required
               />
@@ -84,6 +109,7 @@ export default function Login(): JSX.Element {
                       "--tw-ring-color": theme.hex.focusRing,
                     } as React.CSSProperties
                   }
+                  onChange={e => setLoginInput(prev => ({...prev, password: e.target.value}))}
                   className={`w-full p-3 pr-10 text-sm bg-transparent border-[0.5px] ${theme.border} rounded-lg outline-none transition-all duration-300 placeholder-opacity-40 focus:ring-1`}
                   required
                 />
@@ -125,7 +151,13 @@ export default function Login(): JSX.Element {
                 </button>
               </div>
             </div>
-
+            
+            {errorMsg && (
+              <p className="text-red-500 text-xs text-center mt-2">
+                {errorMsg}
+              </p>
+            )}
+            
             <button
               type="submit"
               className={`w-full py-3.5 mt-2 text-sm tracking-widest uppercase transition-transform active:scale-[0.98] rounded-lg ${theme.userBubble} focus:outline-none focus:ring-2 focus:ring-offset-2`}
@@ -135,13 +167,17 @@ export default function Login(): JSX.Element {
                   "--tw-ring-offset-color": theme.hex.bg,
                 } as React.CSSProperties
               }
+              onClick={handleLoginSubmit}
             >
               Sign In
             </button>
           </form>
 
           {}
-          <div className={`mt-8 pt-6 ${theme.divider}`} onClick={() => navigate('/register')} >
+          <div
+            className={`mt-8 pt-6 ${theme.divider}`}
+            onClick={() => navigate("/register")}
+          >
             <p className={`text-center text-xs font-light ${theme.textMuted}`}>
               Don't have an account?{" "}
               <button
