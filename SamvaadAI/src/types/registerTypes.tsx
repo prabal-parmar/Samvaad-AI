@@ -13,6 +13,9 @@ export interface ThemeTokens {
   hoverSubtle: string;
   divider: string;
   gradientFade: string;
+  tagBg: string;
+  tagText: string;
+  userBubbleText: string;
   hex: { 
     border: string; 
     bg: string; 
@@ -24,4 +27,14 @@ export interface ThemeTokens {
 export interface EleganceThemeConfigRegister {
   light: ThemeTokens;
   dark: ThemeTokens;
+}
+
+export interface RegisterUserDataTypes {
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone_number: string;
+  pgoal: string;
+  password: string;
 }

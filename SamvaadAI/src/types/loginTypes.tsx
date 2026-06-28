@@ -24,3 +24,8 @@ export interface EleganceThemeConfigLogin {
   light: ThemeTokens;
   dark: ThemeTokens;
 }
+
+export interface LoginDataTypes {
+  userInp: string;
+  password: string;
+}
