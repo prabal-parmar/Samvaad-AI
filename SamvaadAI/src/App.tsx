@@ -9,6 +9,7 @@ import GuestRoute from './props/GuesRoute'
 import ProtectedRoute from './props/ProtectedRoute'
 import Home from './pages/Home'
 import { useTheme } from './context/themeContext'
+import ChatPage from './pages/chats/ChatPage'
 
 function App() {
   const { setIsDark } = useTheme();
@@ -64,6 +65,13 @@ function App() {
           <GuestRoute>
             <Register />
           </GuestRoute>
+        } />
+
+        <Route path="/chat"
+        element={
+          <ProtectedRoute>
+            <ChatPage />
+          </ProtectedRoute>
         } />
       </Routes>
   )
