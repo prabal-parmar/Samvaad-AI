@@ -42,8 +42,12 @@ func ConnectDB() {
 	}
 	fmt.Println("Connected to PostgreSQL successfuly")
 
-	// Run migrations
-	if err := DB.AutoMigrate(&models.User{}, &models.UserProfile{}); err != nil {
+	// Run migrations{
+	if err := DB.AutoMigrate(
+		&models.User{}, 
+		&models.UserProfile{}, 
+		&models.GoalDataModel{},
+		); err != nil {
 		fmt.Println("Error running migrations:", err)
 		return
 	}
