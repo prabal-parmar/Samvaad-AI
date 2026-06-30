@@ -25,7 +25,7 @@ func Register(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, response);
+	c.JSON(201, response);
 }
 
 func Login(c *gin.Context) {

@@ -3,8 +3,8 @@ package models
 import "github.com/golang-jwt/jwt/v5"
 
 type LoginRequest struct {
-	Email string `json:"email"`
-	Username string `json:"username"`
+	Email *string `json:"email,omitempty"`
+	Username *string `json:"username,omitempty"`
 	Password string `json:"password"`
 }
 
