@@ -13,12 +13,14 @@ type User struct {
 	Profile *UserProfile `json:"profile,omitempty"`
 }
 
+// User Profile for Profile page and details
 type UserProfile struct {
 	ID uint `json:"id" gorm:"primaryKey"`
 
 	UserID uint `json:"user_id"`
+	User User
 
-	TalkingScore float32 `json:"talking_score"`
-	ConfidenceScore float32 `json:"confidence_score"`
-	CommunicationScore float32 `json:"communication_score"`
+	// Need to check later
+	MetricID []uint `json:"metric_id"`
+	Metric []UserChatOverallMetricModel
 }
