@@ -10,6 +10,7 @@ import ProtectedRoute from './props/ProtectedRoute'
 import Home from './pages/Home'
 import { useTheme } from './context/themeContext'
 import ChatPage from './pages/chats/ChatPage'
+import Profile from './pages/settings/Profile'
 
 function App() {
   const { setIsDark } = useTheme();
@@ -71,6 +72,13 @@ function App() {
         element={
           <ProtectedRoute>
             <ChatPage />
+          </ProtectedRoute>
+        } />
+
+        <Route path="/profile"
+        element={
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>
         } />
       </Routes>
